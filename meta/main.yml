@@ -1,0 +1,20 @@
+galaxy_info:
+  author: Tyler Christiansen
+  namespace: supertylerc
+  role_name: zerotier
+  description: Install ZeroTier and Join a Network on multiple OSes
+  license: Apache-2.0
+
+  min_ansible_version: 2.10
+  platforms:
+  - name: Ubuntu
+    versions:
+    - 22.04
+  - name: Debian
+    versions:
+    - 11
+
+  galaxy_tags:
+    - zerotier
+
+dependencies: []

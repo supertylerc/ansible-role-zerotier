@@ -1,0 +1,6 @@
+package:
+  zerotier-one:
+    installed: true
+process:
+  zerotier-one:
+    running: true

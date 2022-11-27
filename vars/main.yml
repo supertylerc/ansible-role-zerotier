@@ -1,0 +1,5 @@
+---
+# vars file for zerotier
+zerotier_supported_distributions:
+  - ubuntu
+  - debian

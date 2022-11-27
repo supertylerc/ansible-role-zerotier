@@ -1,0 +1,25 @@
+---
+
+- name: Add GPG Key
+  ansible.builtin.get_url:
+    url: "{{ zerotier_gpg_key_url }}"
+    dest: "/etc/apt/trusted.gpg.d/zerotier.asc"
+    mode: "0644"
+
+- name: Update Apt Cache
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Add Repository
+  ansible.builtin.apt_repository:
+    repo: "{{ zerotier_apt_repository }}"
+    state: present
+    install_python_apt: true
+    update_cache: true
+    filename: 
+
+- name: Install zerotier
+  ansible.builtin.apt:
+    name: "zerotier-one"
+    state: "present"
+    install_recommends: false

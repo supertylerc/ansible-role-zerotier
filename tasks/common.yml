@@ -1,0 +1,36 @@
+---
+
+- name: Start and Enable Zerotier
+  ansible.builtin.service:
+    name: "zerotier-one"
+    state: "started"
+    enabled: true
+
+- name: Check for the ZeroTier Network
+  ansible.builtin.command:
+    argv:
+      - "zerotier-cli"
+      - "listnetworks"
+      - "-j"
+  register: registered_zerotier_network_id
+  changed_when: false
+
+- name: Join a ZeroTier Network
+  ansible.builtin.command:
+    argv:
+      - "zerotier-cli"
+      - "join"
+      - "{{ zerotier_network_id }}"
+  when:
+    - zerotier_network_id not in registered_zerotier_network_id.stdout | from_json | map(attribute="id")
+    - not zerotier_leave
+
+- name: Leave a ZeroTier Network
+  ansible.builtin.command:
+    argv:
+      - "zerotier-cli"
+      - "leave"
+      - "{{ zerotier_network_id }}"
+  when:
+    - zerotier_network_id in registered_zerotier_network_id.stdout | from_json | map(attribute="id")
+    - zerotier_leave

@@ -1,0 +1,5 @@
+---
+
+- name: Include Shared Debian Tasks
+  ansible.builtin.include_tasks:
+    file: "debian.yml"

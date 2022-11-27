@@ -1,0 +1,16 @@
+---
+# tasks file for zerotier
+
+- name: Check Supported OS
+  ansible.builtin.assert:
+    that:
+      - "ansible_distribution|lower in zerotier_supported_distributions"
+    fail_msg: "You must be running one of: {{ zerotier_supported_distributions }} (you are running: {{ ansible_distribution|lower }}"
+
+- name: Run OS-Specific Installation
+  ansible.builtin.include_tasks:
+    file: "{{ ansible_distribution | lower }}.yml"
+
+- name: Run Common Tasks
+  ansible.builtin.include_tasks:
+    file: "common.yml"
