@@ -9,10 +9,10 @@ galaxy_info:
   platforms:
   - name: Ubuntu
     versions:
-    - 22.04
+    - jammy  # 22.04
   - name: Debian
     versions:
-    - 11
+    - bullseye  # 11
 
   galaxy_tags:
     - zerotier
